@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  discovery-server:
+    image: discovery-server:1
+    build:
+      context: ./discoveryserver/
+      dockerfile: Dockerfile
+    volumes:
+      - /data/discoveryserver
+    ports:
+      - "8761:8761"
+      
+  demo-container:
+    image: demo-container:1
+    build:
+      context: ./demo/
+      dockerfile: Dockerfile
+    depends_on:
+      - discovery-server
+      - time-service
+    volumes:
+      - /data/demo-container
+    ports:
+      - "8090:8090"
+      
+  time-service:
+    image: time-service:1
+    build:
+      context: ./time-server/
+      dockerfile: Dockerfile
+    depends_on:
+      - discovery-server
+    volumes:
+      - /data/time-service
+    ports:
+      - "8091:8091"
