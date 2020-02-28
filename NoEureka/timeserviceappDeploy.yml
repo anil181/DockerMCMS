@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: time-serviceapp-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: time-serviceapp
+  template:
+    metadata:
+      labels:
+        app: time-serviceapp
+    spec:
+      containers:
+      - name: timeservice
+        image: anil181/timeservice:latest
