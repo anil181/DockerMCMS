@@ -32,7 +32,9 @@ class HelloController {
 	
 	@RequestMapping("/india")
 	public String sayHi() {
-		String timenow = restTemplate.getForObject("http://time-service:8091/time", String.class);
+		String url = System.getenv("TIME_SERVICE_URL");
+		System.out.println("The URL is url " + url);
+		String timenow = restTemplate.getForObject("url", String.class);
 		return "Namaste !! " + timenow;
 	}
 }
