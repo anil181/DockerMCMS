@@ -13,5 +13,18 @@ spec:
         app: demoapp
     spec:
       containers:
-      - name: demoapp
-        image: anil181/demoapp:latest
+          - name: demoapp
+            image: anil181/demoapp:latest
+            env:
+              - name: TIME_SERVICE_URL
+                valueFrom:
+                 configMapKeyRef:
+                    name: demoapp-configmap
+                    key: time-service
+            volumeMounts:
+            - name: demo-configmap-volume
+              mountPath: /etc/config
+      volumes:
+         - name: demo-configmap-volume
+           configMap:
+             name: demoapp-configmap
