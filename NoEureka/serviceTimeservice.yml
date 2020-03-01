@@ -3,10 +3,8 @@ kind: Service
 metadata:
   name: time-service
 spec:
-  type: NodePort
   ports:
   - port: 8091
-    nodePort: 30081
     name: http
   selector:
     app: time-serviceapp
