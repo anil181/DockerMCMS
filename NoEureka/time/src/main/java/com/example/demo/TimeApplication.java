@@ -21,8 +21,11 @@ public class TimeApplication {
 class HelloController {
 	@RequestMapping("/time")
 	public String sayHi() {
-	    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+		
+		DateFormat indianFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	    indianFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+	    	    
 	    Date date = new Date();  	  
-		return formatter.format(date);
+		return indianFormat.format(date);
 	}
 }
