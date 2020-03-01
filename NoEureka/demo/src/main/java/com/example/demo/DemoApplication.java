@@ -28,12 +28,16 @@ class HelloController {
 //	@Value("${restUrl}")
 
 //	private String restUrl;
+	@Autowired 
 	private RestTemplate restTemplate;
 	
 	@RequestMapping("/india")
 	public String sayHi() {
-		String url = System.getenv("TIME_SERVICE_URL");
-		System.out.println("The URL is url " + url);
+		String url = System.getenv("TIME_SERVICE_URL");  // Coming from the Kubernetes ConfigMap
+		
+//		String url = "http://localhost:8091/time";
+		System.out.println("The URL to get the time is : " + url);
+
 		String timenow = restTemplate.getForObject(url, String.class);
 		return "Namaste !! " + timenow;
 	}
