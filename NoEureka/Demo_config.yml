@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: demoapp-configmap 
 data:
-  time-service: http://time-service.default.svc.cluster.local:8091/time
+  time-service: http://time-service:8091/time
